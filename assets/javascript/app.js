@@ -55,9 +55,17 @@ function trainData() {
 		console.log(data.val());
 	
    // Calculate next arrival time, minutes away 
-    var frequency = $("#frequency").val().trim();
-    var firstTrainTime = $("#first-train-time").val().trim();
-    console.log(firstTrainTime); //ここで時間がつかまれない
+    var frequency = data.val().frequency;
+    // var frequency = $("#frequency").val().trim();
+    // if (!frequency) {
+    // 	frequency = data.val().frequency;
+    // }
+    var firstTrainTime = data.val().firstTrainTime; 
+    // var firstTrainTime = $("#first-train-time").val().trim();
+    // if (!firstTrainTime) {
+    // 	firstTrainTime = data.val().firstTrainTime;
+    // }
+    console.log(firstTrainTime); //ここで時間がつかまれなかったので line 58-67でfirebaseからfrequency&firstTrainTimeのdataを取るように設定した。
 
     // Converting firstTrainTime
     var firstTimeConverted = moment(firstTrainTime, "hh:mm").subtract(1, "years");
@@ -65,11 +73,11 @@ function trainData() {
 
     // Current time
     var currentTime = moment();
-    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm")); 
+    console.log("Current Time: " + moment(currentTime).format("hh:mm A")); 
 	
     // Difference between the firstTrainTime and currentTIme
     var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-    console.log("DIFFERENCE IN TIME: " + diffTime);
+    console.log("Time Difference: " + diffTime);
 
     // Remainder
     var remainder = diffTime % frequency;
@@ -77,11 +85,11 @@ function trainData() {
 
     // Minute until train
     var minutesTillTrain = frequency - remainder;
-    console.log("MINUTES TILL TRAIN: " + minutesTillTrain);
+    console.log("Minuted Till Train: " + minutesTillTrain);
 
      // Next train
-    var nextTrain = moment().add(minutesTillTrain, "minutes").format("hh:mm");
-    console.log("ARRIVAL TIME: " + nextTrain);
+    var nextTrain = moment().add(minutesTillTrain, "minutes").format("hh:mm A");
+    console.log("Next Train: " + nextTrain);
    
 
 		
