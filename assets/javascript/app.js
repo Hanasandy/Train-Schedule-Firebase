@@ -10,7 +10,7 @@
   firebase.initializeApp(config);
 
 //Graba curent data&time and show on DOM (jumbotron) 
-var userTime = moment().format("MMM DD YYYY, hh:mm ");
+var userTime = moment().format("MMM DD YYYY, hh:mm A");
     $("#userTime").append(userTime);
 
 var database = firebase.database();
